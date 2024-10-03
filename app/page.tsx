@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import {Tab} from "@headlessui/react";
+import Masonry from 'react-masonry-css'
+
 
 const tabs = [
     {
-        key: "all",
-        display: "All",
+        key: "all photos",
+        display: "All Photos",
     },
     {
-        key: "oceans",
-        display: "Oceans"
+        key: "painting with light",
+        display: "Painting with Light"
     },
     {
         key: "forests",
@@ -20,12 +22,12 @@ const tabs = [
 
 export default function Home() {
     return (
-        <div className="flex flex-col h-full bg-[url('/backgroundpics3.webp')] bg-right	bg-cover">
+        <div className="h-full bg-[url('/backgroundpics3.webp')] bg-right bg-cover overflow-auto">
 {/*
             <p className="bg-gradient-to-r from-[black] to-[#1c1c1c] -[0px] flex justify-center items-center ">Photography Portfolio</p>
 */}
 
-            <header className="flex justify-between items-center h-[90px] px-6">
+            <header className="fixed top-0 w-full z-10 flex justify-between items-center h-[90px] px-6">
                 <div></div>
                 <Link href="#"
                       className="rotate-3xl bg-white px-4 py-2 text-black font-medium rounded-md hover:bg-gray-500 transition duration-300"
@@ -34,7 +36,7 @@ export default function Home() {
                 </Link>
             </header>
 
-            <main className="grow">
+            <main className="pt-[110px]">
                 <div className="flex flex-col items-center h-full">
                     <Tab.Group >
                         <Tab.List className="flex items-center gap-20">
@@ -45,16 +47,22 @@ export default function Home() {
                                         <span
                                             className={selected ? "text-white" : "text-stone-600"}
                                         >
-                                             {tab.display }
+                                             {tab.display}
                                         </span>
                                     )}
                                 </Tab>
-
                             ))}
                         </Tab.List>
-                        <Tab.Panels className="h-full bg-stone-900 bg-opacity-55 max-w-[900px] w-full p-2 sm:p-4 my-6">
-                            <Tab.Panel className="">All Photos</Tab.Panel>
-                            <Tab.Panel>Oceans</Tab.Panel>
+                        <Tab.Panels className="h-full max-w-[900px] w-full p-2 sm:p-4 my-6">
+                            <Tab.Panel className="overflow-auto">
+                                <Masonry breakpointCols={2} className="flex gap-2" columnClassName="">
+                                    <img src="/pwl-1.webp" alt="pwl-1"className="my-2"/>
+                                    <img src="/pwl-2.webp" alt="pwl-2"className="my-2"/>
+                                    <img src="/pwl-3.webp" alt="pwl-3"className="my-2"/>
+                                    <img src="/pwl-4.webp" alt="pwl-4"className="my-2"/>
+                                </Masonry>
+                            </Tab.Panel>
+                            <Tab.Panel>Painting with Light</Tab.Panel>
                             <Tab.Panel>Forests</Tab.Panel>
                         </Tab.Panels>
                     </Tab.Group>
