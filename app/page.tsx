@@ -56,10 +56,10 @@ export default function Home() {
                         <Tab.Panels className="h-full max-w-[900px] w-full p-2 sm:p-4 my-6">
                             <Tab.Panel className="overflow-auto">
                                 <Masonry breakpointCols={2} className="flex gap-2" columnClassName="">
-                                    <img src="/pwl-1.webp" alt="pwl-1"className="my-2"/>
-                                    <img src="/pwl-2.webp" alt="pwl-2"className="my-2"/>
-                                    <img src="/pwl-3.webp" alt="pwl-3"className="my-2"/>
-                                    <img src="/pwl-4.webp" alt="pwl-4"className="my-2"/>
+                                    <img src="/pwl-1.webp" alt="pwl-1" className="my-2"/>
+                                    <img src="/pwl-2.webp" alt="pwl-2" className="my-2"/>
+                                    <img src="/pwl-3.webp" alt="pwl-3" className="my-2"/>
+                                    <img src="/pwl-4.webp" alt="pwl-4" className="my-2"/>
                                 </Masonry>
                             </Tab.Panel>
                             <Tab.Panel>Painting with Light</Tab.Panel>
