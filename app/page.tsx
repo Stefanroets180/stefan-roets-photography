@@ -34,7 +34,7 @@ export default function Home() {
                     Stefan's Photography Portfolio
                 </span>
                 <Link href="#"
-                      className="rotate-3xl bg-white px-4 py-2 text-black font-medium rounded-md hover:bg-gray-500 transition duration-300"
+                      className="rotate-3xl bg-teal-300 px-4 py-2 text-black font-medium rounded-md hover:bg-violet-400 transition duration-300"
                 >
                     Get in touch
                 </Link>
@@ -50,7 +50,7 @@ export default function Home() {
                                         <span
                                             className={classNames(
                                                 "uppercase text-lg",
-                                                selected ? "text-white" : "text-stone-600"
+                                                selected ? "text-violet-400" : "text-teal-300"
                                             )}
                                         >
                                              {tab.display}
