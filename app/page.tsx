@@ -2,8 +2,29 @@
 
 import Link from "next/link";
 import {Tab} from "@headlessui/react";
-import Masonry from 'react-masonry-css'
-import classNames from 'classnames'
+import Masonry from 'react-masonry-css';
+import Image from 'next/image';
+import classNames from 'classnames';
+
+import type {LightGallery} from "lightgallery/lightgallery";
+import LightGalleryComponent from 'lightgallery/react';
+
+// import styles
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
+
+// import plugins if you need
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgZoom from 'lightgallery/plugins/zoom';
+
+import bgImage from '../public/backgroundpics3.webp';
+
+import pwl1 from '../public/pwl-1.webp';
+import pwl2 from '../public/pwl-2.webp';
+import pwl3 from '../public/pwl-3.webp';
+import pwl4 from '../public/pwl-4.webp';
+import {useRef} from "react";
 
 
 const tabs = [
@@ -19,27 +40,36 @@ const tabs = [
         key: "forests",
         display: "Forests"
     }
-]
+];
 
-export default function Home() {
+const images = [pwl1, pwl2, pwl3, pwl4];
+
+export default function Home(){
+    const lightboxRef = useRef<LightGallery | null>(null)
+
     return (
-        <div className="h-full bg-[url('/backgroundpics3.webp')] bg-right bg-cover overflow-auto">
+        <div className="h-full overflow-auto">
 {/*
-            <p className="bg-gradient-to-r from-[black] to-[#1c1c1c] -[0px] flex justify-center items-center ">Photography Portfolio</p>
-*/}
+            <p className="bg-gradient-to-r from-[black] to-[#1c1c1c] -[0px] flex justify-center items-center ">Photography Portfolio</p>*/}
+            <Image
+                className="fixed left-0 top-0 z-0"
+                src={bgImage}
+                alt="background-image"
+                placeholder="blur"
+            />
 
-            <header className="fixed top-0 w-full z-10 flex justify-between items-center h-[90px] px-12">
-                <span className="uppercase text-lg font-medium">
-                    Stefan's Photography Portfolio
-                </span>
+            <div className="fixed left-0 top-0 w-full h-full z-10 from-stone-800 bg-gradient-to-t"></div>
+
+            <header className="fixed top-0 w-full z-20 flex justify-between items-center h-[90px] px-6">
+                <div></div>
                 <Link href="#"
-                      className="rotate-3xl bg-teal-300 px-4 py-2 text-black font-medium rounded-md hover:bg-violet-400 transition duration-300"
+                      className="rotate-3xl bg-white px-4 py-2 text-black font-medium rounded-md hover:bg-gray-500 transition duration-300"
                 >
                     Get in touch
                 </Link>
             </header>
 
-            <main className="pt-[110px]">
+            <main className="relative pt-[110px] z-20">
                 <div className="flex flex-col items-center h-full">
                     <Tab.Group >
                         <Tab.List className="flex items-center gap-20 uppercase">
@@ -48,8 +78,8 @@ export default function Home() {
                                     {({selected}) => (
                                         <span
                                             className={classNames(
-                                                "uppercase text-lg",
-                                                selected ? "text-violet-400" : "text-teal-300"
+                                                "uppercase text-l",
+                                                selected ? "text-white" : "text-stone-600"
                                             )}
                                         >
                                              {tab.display}
@@ -62,14 +92,38 @@ export default function Home() {
                             <Tab.Panel className="overflow-auto">
                                 <Masonry
                                     breakpointCols={2}
-                                    className="flex gap-4"
+                                    className="flex gap-2"
                                     columnClassName=""
                                 >
-                                    <img src="/pwl-1.webp" alt="pwl-1" className="my-4"/>
-                                    <img src="/pwl-2.webp" alt="pwl-2" className="my-4"/>
-                                    <img src="/pwl-3.webp" alt="pwl-3" className="my-4"/>
-                                    <img src="/pwl-4.webp" alt="pwl-4" className="my-4"/>
+                                    {images.map((image, idx) => (
+                                        <Image
+                                            key={image.src}
+                                            src={image}
+                                            alt="placeholder"
+                                            className="my-2 hover:opacity-75 cursor-pointer"
+                                            placeholder="blur"
+                                            onClick={() => {
+                                                lightboxRef.current?.openGallery(idx);
+                                            }}
+                                        />
+                                    ))}
                                 </Masonry>
+
+                                <LightGalleryComponent
+                                    onInit={(ref) => {
+                                       if (ref) {
+                                            lightboxRef.current = ref.instance
+
+                                       }
+                                    }}
+                                    speed={500}
+                                    plugins={[lgThumbnail, lgZoom]}
+                                    dynamic
+                                    dynamicEl={images.map(image => ({
+                                        src: image.src,
+                                        thumb: image.src,
+                                    }))}
+                                />
                             </Tab.Panel>
                             <Tab.Panel>Painting with Light</Tab.Panel>
                             <Tab.Panel>Forests</Tab.Panel>
@@ -79,8 +133,8 @@ export default function Home() {
 
             </main>
 
-            <footer className="bg-[black] -[10px] flex justify-center items-center uppercase text-lg font-medium">
-                <p> Stefan's Photography Portfolio </p>
+            <footer className="relative bg-[black] -[10px] flex justify-center items-center z-20">
+                <p> Stefan Photography Portfolio </p>
             </footer>
         </div>
     );
