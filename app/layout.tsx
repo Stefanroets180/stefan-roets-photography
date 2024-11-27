@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Gorditas } from 'next/font/google'
+import React from "react";
 
 const gorditasSans = Gorditas({
   subsets: ['latin'],

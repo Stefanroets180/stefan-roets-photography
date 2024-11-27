@@ -42,15 +42,17 @@ const tabs = [
     }
 ];
 
-const images = [pwl1, pwl2, pwl3, pwl4];
+    const images = [pwl1, pwl2, pwl3, pwl4];
+
+
 
 export default function Home(){
     const lightboxRef = useRef<LightGallery | null>(null)
 
     return (
         <div className="h-full overflow-auto">
-{/*
-            <p className="bg-gradient-to-r from-[black] to-[#1c1c1c] -[0px] flex justify-center items-center ">Photography Portfolio</p>*/}
+
+            <p className="bg-gradient-to-r from-[black] to-[#1c1c1c] -[0px] flex justify-center items-center ">Photography Portfolio</p>
             <Image
                 className="fixed left-0 top-0 z-0"
                 src={bgImage}
